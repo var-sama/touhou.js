@@ -1,0 +1,199 @@
+:root {
+    --term-bg: #0c0c0c00;
+    --term-fg: #00ff00;
+    --game-bg: #05051000;
+    --bsod-bg: #0000aa;
+    --bsod-fg: #ffffff;
+    --font-mono: 'Share Tech Mono', monospace;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100vh;
+    color: var(--term-fg);
+    background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+                  url('touhou.jpg');
+    background-position: center;     /* biar di tengah */
+    background-repeat: no-repeat;    /* biar ga ngulang */
+    background-size: cover;          /* biar full nutup layar */
+    font-family: var(--font-mono);
+    overflow: hidden;
+}
+
+
+/* CRT Effect Overlay */
+.crt-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    background-size: 100% 4px, 6px 100%;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.8;
+}
+
+.main-container {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+}
+
+/* Terminal Panel */
+.terminal-panel {
+    width: 40%;
+    border-right: 2px solid #33ff33;
+    background-color: var(--term-bg);
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-sizing: border-box;
+    box-shadow: inset 0 0 20px rgba(0, 255, 0, 0.1);
+}
+
+.terminal-header {
+    margin-bottom: 20px;
+    font-weight: bold;
+    border-bottom: 1px solid var(--term-fg);
+    padding-bottom: 5px;
+}
+
+.terminal-output {
+    flex-grow: 1;
+    overflow-y: auto;
+    margin-bottom: 10px;
+}
+
+.terminal-output p {
+    margin: 5px 0;
+    word-wrap: break-word;
+}
+
+.terminal-input-line {
+    display: flex;
+    align-items: center;
+}
+
+.prompt {
+    margin-right: 10px;
+}
+
+input[type="text"] {
+    background: transparent;
+    border: none;
+    color: var(--term-fg);
+    font-family: var(--font-mono);
+    font-size: 1em;
+    flex-grow: 1;
+    outline: none;
+    text-shadow: 0 0 5px rgba(0,255,0,0.5);
+}
+
+/* Game Panel */
+.game-panel {
+    width: 60%;
+    position: relative;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#gameCanvas {
+    /* background-color: #000; */
+    box-shadow: 0 0 30px rgba(0,0,0,0.8);
+    display: none;
+    max-height: 100vh;
+    max-width: 100%;
+}
+
+#bootScreen {
+    position: absolute;
+    color: #fff;
+    text-align: center;
+    text-shadow: 0 0 10px rgba(255,255,255,0.8);
+}
+
+.blink {
+    animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+    50% { opacity: 0; }
+}
+
+/* BSOD Styles */
+#bsod {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-color: var(--bsod-bg);
+    color: var(--bsod-fg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Courier New', Courier, monospace;
+    z-index: 100;
+}
+
+#bsod h1 {
+    background: white;
+    color: var(--bsod-bg);
+    padding: 2px 10px;
+    margin-bottom: 30px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Game UI Overlays */
+#gameUI {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+}
+
+#scoreDisplay, #livesDisplay {
+    position: absolute;
+    color: #0ff;
+    font-size: 18px;
+    text-shadow: 0 0 5px #0ff;
+    padding: 10px;
+}
+
+#scoreDisplay { top: 10px; right: 20px; }
+#livesDisplay { top: 10px; left: 20px; }
+
+#boss-hp-container {
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 10px;
+    border: 1px solid #f00;
+    display: none;
+}
+
+#boss-hp-bar {
+    height: 100%;
+    width: 100%;
+    background-color: #f00;
+    box-shadow: 0 0 10px #f00;
+    transition: width 0.1s;
+}
+
+#gameCanvas {
+    background: transparent;
+}
+
+.success-text { color: #55ff55; }
+.error-text { color: #ff5555; }
+.sys-text { color: #ffff55; }
