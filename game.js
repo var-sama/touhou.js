@@ -529,7 +529,7 @@ if (boss && boss.timeStopActive && boss.timeStopState === 1) {
         }
 
         // HITBOX (aktifin lagi kalau mau kena)
-        /*
+        
         if (player.invulnerableTime <= 0) {
             const dist = Math.hypot(b.x - player.x, b.y - player.y);
             if (dist < player.radius + (b.radius * 0.5)) {
@@ -538,7 +538,7 @@ if (boss && boss.timeStopActive && boss.timeStopState === 1) {
                 continue;
             }
         }
-        */
+        
 
         if (b.x < -30 || b.x > canvas.width + 30 || b.y < -30 || b.y > canvas.height + 30) {
             enemyBullets.splice(i, 1);
